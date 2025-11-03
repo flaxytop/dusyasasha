@@ -47,11 +47,11 @@ export const memories: MemoryPoint[] = [
   // 4
   { ...at(3), title: 'Чуть уронил Дусю', text: 'Ну бывает ) (я тебе помог)', image: '/memories/snowgirl.jpg' },
   // 5
-  { ...at(4), title: 'Милли-моменты', text: 'Ласковые объятия и тепло.', image: '/memories/mili.jpg' },
+
   // 6
   { ...at(5), title: 'Ахахахах жена чуть бьет', text: 'Но любит', image: '/memories/king.jpg' },
   // 7
-  { ...at(6), title: 'Аниме-девочка', text: 'Нежность в каждом взгляде.', image: '/memories/myanimegirl.jpg' },
+
 
   // 9
   { ...at(9), title: 'Едем с меги', text: 'С дорогой мне', image: '/memories/bus.jpg' },
