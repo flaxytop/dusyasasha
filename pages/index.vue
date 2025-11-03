@@ -18,6 +18,7 @@
             <NuxtLink to="/gallery" class="btn-primary">Наша Галерея</NuxtLink>
             <a href="#letter" class="muted" style="text-decoration:none;padding:14px 12px">Письмо для тебя</a>
             <NuxtLink to="/coupons" class="muted" style="text-decoration:none;padding:14px 12px">Купоны</NuxtLink>
+            <NuxtLink to="/map" class="muted" style="text-decoration:none;padding:14px 12px">Карта</NuxtLink>
           </div>
         </div>
         <div v-reveal>

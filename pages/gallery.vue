@@ -27,14 +27,23 @@
 
 <script setup lang="ts">
 import { memories } from '@/content/memories'
+import { galleryPhotos } from '@/content/photos'
 type Photo = { url: string; name?: string; mtime?: string }
 const files = ref<Photo[]>([])
 const lightboxOpen = ref(false)
 const current = ref(0)
 
 onMounted(() => {
-  files.value = (memories || []).map((m, idx) => ({ url: m.image || '', name: m.title }))
-    .filter(p => !!p.url)
+  const fromMemories = (memories || []).map((m) => ({ url: m.image || '', name: m.title })).filter(p => !!p.url)
+  const fromPhotos = (galleryPhotos || []).map((u) => ({ url: u, name: u.split('/').pop() }))
+  const seen = new Set<string>()
+  const combined: Photo[] = []
+  for (const p of [...fromPhotos, ...fromMemories]) {
+    if (!p.url || seen.has(p.url)) continue
+    seen.add(p.url)
+    combined.push(p)
+  }
+  files.value = combined
 })
 
 function open(i:number) { current.value = i; lightboxOpen.value = true }
