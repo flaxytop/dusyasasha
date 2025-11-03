@@ -87,6 +87,7 @@ import TypewriterText from '@/components/TypewriterText.vue'
 import CountUp from '@/components/CountUp.vue'
 import { anniversaryConfig as config, daysTogether } from '@/content/config'
 import { getRelationshipMetrics } from '@/utils/time'
+import { memories } from '@/content/memories'
 
 const together = daysTogether()
 const metrics = getRelationshipMetrics(config.startDate)
@@ -96,14 +97,9 @@ const currentLetter = (config.lettersByYear && config.lettersByYear[currentLette
 
 // Блок героевских фото — берём первые 5 файлов из /api/photos (если есть)
 const heroImages = ref<string[]>([])
-onMounted(async () => {
-  try {
-    const res = await $fetch<{ files: Array<string | { url: string }> }>('/api/photos')
-    const list = (res?.files || []).map((it: any) => typeof it === 'string' ? it : it.url)
-    heroImages.value = list.slice(0, 5)
-  } catch (e) {
-    heroImages.value = []
-  }
+onMounted(() => {
+  const list = (memories || []).map(m => m.image).filter(Boolean) as string[]
+  heroImages.value = list.slice(0, 5)
 })
 
 </script>

@@ -2,10 +2,9 @@
   <section class="section" style="padding:32px 0 60px">
     <div class="container">
       <h1 style="margin:0 0 12px;font-weight:900">Наша Галерея</h1>
-      <p class="muted" style="margin:0 0 20px">Добавь фото в папку <code>public/photos</code> — они появятся здесь автоматически.</p>
 
       <div v-if="files.length === 0" class="card" style="padding:18px">
-        <div>Пока здесь пусто. Помести ваши снимки в <code>public/photos</code> (jpg, png, jpeg, webp).</div>
+        <div>Пока здесь пусто. Помести ваши снимки в</div>
       </div>
 
       <div v-else class="masonry">
@@ -27,19 +26,15 @@
 </template>
 
 <script setup lang="ts">
+import { memories } from '@/content/memories'
 type Photo = { url: string; name?: string; mtime?: string }
 const files = ref<Photo[]>([])
 const lightboxOpen = ref(false)
 const current = ref(0)
 
-onMounted(async () => {
-  try {
-    const res = await $fetch<{ files: Array<string | Photo> }>('/api/photos')
-    const normalized: Photo[] = (res.files || []).map((it: any) => typeof it === 'string' ? ({ url: it }) : it)
-    files.value = normalized
-  } catch (e) {
-    files.value = []
-  }
+onMounted(() => {
+  files.value = (memories || []).map((m, idx) => ({ url: m.image || '', name: m.title }))
+    .filter(p => !!p.url)
 })
 
 function open(i:number) { current.value = i; lightboxOpen.value = true }

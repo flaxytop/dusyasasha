@@ -27,18 +27,10 @@ onMounted(async () => {
     iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
   })
 
-  // Load gallery photos to use in popups if memory image is not set
-  let galleryUrls: string[] = []
-  try {
-    const res: any = await $fetch('/api/photos')
-    const list: any[] = (res?.files || [])
-    galleryUrls = list.map((it: any) => typeof it === 'string' ? it : it.url)
-  } catch {}
-
   for (const p of props.points) {
     const m = L.marker([p.lat, p.lng], { icon: markerIcon })
     const date = p.date ? new Date(p.date).toLocaleDateString() : ''
-    const chosen = p.image || galleryUrls[(props.points.indexOf(p)) % Math.max(1, galleryUrls.length)]
+    const chosen = p.image
     const img = chosen ? `<div style="margin-top:8px"><img src="${chosen}" alt="${p.title}" style="max-width:220px;max-height:160px;border-radius:8px;display:block" /></div>` : ''
     const dateHtml = date ? `<div class="muted" style="font-size:12px">${date}</div>` : ''
     const html = `<div style="min-width:200px"><div style="font-weight:700;margin-bottom:4px">${p.title}</div>${dateHtml}<div style="margin-top:6px">${p.text ?? ''}</div>${img}</div>`
