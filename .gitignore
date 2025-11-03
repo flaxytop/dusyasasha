@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+
+# Nuxt build output
+.nuxt/
+.output/
+.dist/
+.next/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+logs/
+
+# Editor/OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Env / Secrets
+.env
+.env.*
+!.env.example
+
+# Cache
+.cache/
+.husky/_/
+.eslintcache
+
+# Tests
+coverage/
+
+# Temporary
+*.tmp
+*.temp
+
+# Lockfiles (optional, keep one if you prefer)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Images: keep project assets tracked (do NOT ignore public/memories or public/photos)
+# public/memories/**
+# public/photos/**
+
